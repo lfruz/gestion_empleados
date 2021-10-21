@@ -91,18 +91,21 @@
                 <img src="{{ url_for('static', filename='dist/img/user2-160x160.jpg')}}" class="user-image"
                   alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">Alexander Pierce</span>
+                {% if session['id_empleado'] %}
+                <span class="hidden-xs">{{ session['nombres'] }} {{ session['apellidos'] }}</span>
+                {%endif%}
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
                   <img src="{{ url_for('static', filename='dist/img/user2-160x160.jpg')}}" class="img-circle"
                     alt="User Image">
-
+                  {% if session['id_empleado'] %}
                   <p>
-                    Alexander Pierce - Web Developer
-                    <small>Super Admin</small>
+                    {{ session['nombres'] }} {{ session['apellidos'] }}
+                    <small>{{ session['rol'] }}</small>
                   </p>
+                  {%endif%}
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -110,7 +113,7 @@
                     <a href="#" class="btn btn-default btn-flat">Cambiar Contraseña</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Cerrar Sesion</a>
+                    <a href="{{url_for('main.logout')}}" class="btn btn-default btn-flat">Cerrar Sesion</a>
                   </div>
                 </li>
               </ul>
@@ -129,10 +132,21 @@
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MENU</li>
           <!-- Optionally, you can add icons to the links -->
-          <li><a href="/miWeb/home"><i class="fa fa-users"></i> <span>Gestionar Empleados</span></a></li>
-          <li><a href="/miWeb/ver_desempenio"><i class="fa fa-line-chart"></i> <span>Desempeño</span></a></li>
-          <li><a href="/miWeb/perfil"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
-          <li><a href="/miWeb/"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión </span></a></li>
+          {% if session['rol']=='Super Administrador' %}
+          <li><a href="{{url_for('main.home')}}"><i class="fa fa-users"></i> <span>Gestionar Empleados</span></a></li>
+          <li><a href="{{url_for('main.perfil')}}"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
+          <li><a href="{{url_for('main.logout')}}"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión </span></a></li>
+          {% endif %}
+          {% if session['rol']=='Administrador' %}
+          <li><a href="{{url_for('main.home')}}"><i class="fa fa-users"></i> <span>Gestionar Empleados</span></a></li>
+          <li><a href="{{url_for('main.perfil')}}"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
+          <li><a href="{{url_for('main.logout')}}"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión </span></a></li>
+          {% endif %}
+          {% if session['rol']=='Usuario Final' %}
+          <li><a href="{{url_for('main.ver_desempenio')}}"><i class="fa fa-users"></i> <span>Desempeño</span></a></li>
+          <li><a href="{{url_for('main.perfil')}}"><i class="fa fa-user"></i> <span>Perfil</span></a></li>
+          <li><a href="{{url_for('main.logout')}}"><i class="fa fa-sign-out"></i> <span>Cerrar Sesión </span></a></li>
+          {% endif %}
         </ul>
         <!-- /.sidebar-menu -->
       </section>
@@ -247,6 +261,8 @@
   <script src="{{ url_for('static', filename='dist/js/pages/dashboard2.js')}}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ url_for('static', filename='dist/js/demo.js')}}"></script>
+  <!-- Funciones js -->
+  <script src="{{ url_for('static', filename='dist/js/funciones.js')}}"></script>
 
   <!-- page script -->
   <script>

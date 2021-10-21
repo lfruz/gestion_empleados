@@ -44,7 +44,7 @@
         <div class="login-box-body">
             <h3 class="login-box-msg"><b>Iniciar Sesion</b></h3>
 
-            <form action="/miWeb/home" method="post" novalidate autocomplete="off">
+            <form name="formLogin" method="post" autocomplete="off">
                 {{ form.hidden_tag() }}
                 <div class="form-group has-feedback">
                     {{ form.user.label }}
@@ -56,6 +56,14 @@
                     {{ form.password(type="password", class="form-control", placeholder="Contraseña") }}
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
+                {% for mensaje in get_flashed_messages(category_filter=['errorLogin']) %}
+
+                <div class="alert alert-warning alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                    {{ mensaje }}
+                </div>
+                {% endfor %}
                 <div class="row">
                     <div class="col-xs-8">
                         <!-- <div class="checkbox icheck">

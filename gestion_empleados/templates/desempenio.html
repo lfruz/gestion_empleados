@@ -3,12 +3,13 @@
 {% block title %} Calificar Desempeño - Gestion de Empleados {% endblock %}
 {% block name_page %} Calificar Desempeño Empleado {% endblock %}
 {% block content %}
-<form action="" method="post" novalidate>
+{%if rows[0]!=null %}
+<form name="formDesempenioEmpleado" method="post">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.id_empleado.label }}
-        {{ form.id_empleado(type="number", class="form-control", placeholder="Identificacion") }}
-
+        {{ form.id_empleado(value=rows[0], type="number", class="form-control",disabled="on") }}
+        {{ form.id_evaluador(value=session['id_empleado'],type="hidden") }}
     </div>
 
     <div class="form-group">
@@ -22,10 +23,11 @@
         {{ form.puntaje(type="number", class="form-control", placeholder="Puntaje") }}
 
     </div>
+    {{ form.id_evaluador(value=session['id_empleado'],type="hidden") }}
 
     <center>
         {{ form.calificar_desempenio(class="btn btn-success") }}
     </center>
 </form>
-
+{% endif %}
 {% endblock %}

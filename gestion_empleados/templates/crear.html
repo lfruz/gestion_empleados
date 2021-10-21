@@ -3,12 +3,13 @@
 {% block title %} Nuevo - Gestion de Empleados {% endblock %}
 {% block name_page %} Nuevo Empleado {% endblock %}
 {% block content %}
-<form action="" method="post" novalidate>
+<form name="formCrearEmpleado" onsubmit="return validar();" method="post">
     {{ form.hidden_tag() }}
     <div class="col-md-6">
         <div class="form-group">
             {{ form.identificacion.label }}
-            {{ form.identificacion(type="number", class="form-control", placeholder="Identificacion") }}
+            {{ form.identificacion(type="number", class="form-control",
+            placeholder="Identificacion") }}
 
         </div>
     </div>
