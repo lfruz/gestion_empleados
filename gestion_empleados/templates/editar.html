@@ -1,0 +1,120 @@
+{% extends 'template.html' %}
+
+{% block title %} Editar - Gestion de Empleados {% endblock %}
+{% block name_page %} Editar Empleado {% endblock %}
+{% block content %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.identificacion.label }}
+            {{ form.identificacion(type="number", class="form-control", placeholder="Identificacion") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.fecha_ingreso.label }}
+            {{ form.fecha_ingreso(type="date", class="form-control") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.nombres.label }}
+            {{ form.nombres(type="text", class="form-control", placeholder="Nombres") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.tipo_contrato.label }}
+            {{ form.tipo_contrato(type="text", class="form-control", placeholder="Tipo Contrato") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.apellidos.label }}
+            {{ form.apellidos(type="text", class="form-control", placeholder="Apellidos") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.terminacion_contrato.label }}
+            {{ form.terminacion_contrato(type="date",class="form-control") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.fecha_nacimiento.label }}
+            {{ form.fecha_nacimiento(type="date",class="form-control") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.cargo.label }}
+            {{ form.cargo(type="text", class="form-control", placeholder="Cargo") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.sexo.label }}
+            {{ form.sexo( class="form-control") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.dependencia.label }}
+            {{ form.dependencia(type="text", class="form-control", placeholder="Dependencia") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.correo.label }}
+            {{ form.correo(type="email", class="form-control", placeholder="Correo Electronico") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.salario.label }}
+            {{ form.salario(type="text", class="form-control", placeholder="Salario") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.direccion.label }}
+            {{ form.direccion(type="text", class="form-control", placeholder="Direccion") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.rol.label }}
+            {{ form.rol(class="form-control") }}
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form.telefono.label }}
+            {{ form.telefono(type="number", class="form-control", placeholder="Telefono") }}
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <center>
+            {{ form.editar(class="btn btn-warning") }}
+        </center>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'template.html' %}
+
+{% block title %} Desempeño - Gestion de Empleados {% endblock %}
+{% block name_page %} Desempeño Empleado {% endblock %}
+{% block content %}
+<!-- Chat box -->
+<br><br>
+<div class="box-body chat" id="chat-box">
+    <!-- chat item -->
+    <div class="item">
+        <img src="{{ url_for('static', filename='dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+        <p class="message">
+            <a href="#" class="name">
+                <small class="text-muted pull-right"><i class="fa fa-calendar"></i> 30/09/2021</small>
+                Nombre Evaluador
+            </a>
+            I would like to meet you to discuss the latest news about
+            the arrival of the new theme. They say it is going to be one the
+            best themes on the market
+            <br>
+            Puntaje: 10
+        </p>
+    </div>
+    <!-- /.item -->
+    <!-- chat item -->
+    <div class="item">
+        <img src="{{ url_for('static', filename='dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+
+        <p class="message">
+            <a href="#" class="name">
+                <small class="text-muted pull-right"><i class="fa fa-calendar"></i> 30/10/2021</small>
+                Nombre Evaluador
+            </a>
+            I would like to meet you to discuss the latest news about
+            the arrival of the new theme. They say it is going to be one the
+            best themes on the market
+            <br>
+            Puntaje: 8
+        </p>
+    </div>
+    <!-- /.item -->
+</div>
+<!-- /.chat -->
+
+<div class="col-md-12">
+    <center>
+        <a type="button" href="/miWeb/home" class="btn btn-primary">Regresar</a>
+    </center>
+</div>
+{% endblock %}
