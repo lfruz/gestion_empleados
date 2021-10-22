@@ -159,6 +159,34 @@
       <section class="content container-fluid">
         <div class="row">
           <div class="col-md-12">
+            {% for mensaje in get_flashed_messages(category_filter=['crearEmpleado']) %}
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              {{ mensaje }}
+            </div>
+            {% endfor %}
+            {% for mensaje in get_flashed_messages(category_filter=['editarEmpleado']) %}
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              {{ mensaje }}
+            </div>
+            {% endfor %}
+            {% for mensaje in get_flashed_messages(category_filter=['deleteEmpleado']) %}
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              {{ mensaje }}
+            </div>
+            {% endfor %}
+            {% for mensaje in get_flashed_messages(category_filter=['evaluarEmpleado']) %}
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              {{ mensaje }}
+            </div>
+            {% endfor %}
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">{% block name_page %} {% endblock %}</h3>
@@ -266,6 +294,9 @@
 
   <!-- page script -->
   <script>
+    $(".alert").delay(2000).slideUp(200, function () {
+      $(this).alert('close');
+    })
     $(function () {
       $('#example1').DataTable(
         {
@@ -274,17 +305,6 @@
           }
         }
       )
-      $('#example2').DataTable({
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
-        'paging': true,
-        'lengthChange': false,
-        'searching': false,
-        'ordering': true,
-        'info': true,
-        'autoWidth': false
-      })
     })
   </script>
 </body>

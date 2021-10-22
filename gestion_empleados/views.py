@@ -30,7 +30,7 @@ def login():
         db = get_db()
         #sql = "select * from usuario where usuario = '{0}' and clave= '{1}'".format(usuario, clave)
         user = db.execute(
-            'select * from tbl_empleados where identificacion = ? ', (usuario,)).fetchone()
+            'SELECT * FROM tbl_empleados WHERE identificacion = ? ', (usuario,)).fetchone()
         db.commit()
         db.close()
 
@@ -60,7 +60,9 @@ def home():
     db = get_db()
     id = session['id_empleado']
     rows = db.execute(
-        'select * from tbl_empleados where identificacion != ?', [id]).fetchall()
+        'select * from tbl_empleados where identificacion != ? and rol!="Super Administrador"', [id]).fetchall()
+    db.commit()
+    db.close()
     form_empleado = FormEmpleado()
     return render_template('home.html', rows=rows, form=form_empleado)
 
@@ -87,14 +89,13 @@ def crear():
         rolInput = escape(request.form['rol'])
         contraseniaInput = escape(request.form['passw'])
         db = get_db()
-        # agregar SLAT
-        #clave = SALT + clave + usuario
         contraseniaInput = SALT + contraseniaInput + id_empleadoInput
         contraseniaInput = generate_password_hash(contraseniaInput)
-        db.execute("insert into tbl_empleados ( identificacion,nombres, apellidos, fecha_nacimiento, sexo, correo,direccion,telefono,fecha_ingreso,tipo_contrato,fecha_termin_contrato,cargo,dependencia,salario,rol,contrasenia) values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        db.execute("INSERT INTO tbl_empleados (identificacion,nombres, apellidos, fecha_nacimiento, sexo, correo,direccion,telefono,fecha_ingreso,tipo_contrato,fecha_termin_contrato,cargo,dependencia,salario,rol,contrasenia) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                    (id_empleadoInput, nombresInput, apellidosInput, fechaNacimientoInput, sexoInput, correoInput, direccionInput, telefonoInput, fechaIngresoInput, tipoContratoInput, fechaTerminacionInput, cargoInput, dependenciaInput, salarioInput, rolInput, contraseniaInput))
         db.commit()
         db.close()
+        flash('Empleado Guardado Exitosamente', 'crearEmpleado')
         return redirect(url_for('main.home'))
 
     return render_template('crear.html', form=form_empleado)
@@ -105,7 +106,8 @@ def crear():
 def editar(id):
     db = get_db()
     rows = db.execute(
-        'select * from tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+        'SELECT * FROM tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+    db.commit()
     print(rows)
     if request.method == 'POST':
         nombresInput = escape(request.form['nombres'])
@@ -125,16 +127,22 @@ def editar(id):
         db.execute("UPDATE tbl_empleados SET nombres = ?, apellidos= ?, fecha_nacimiento= ?, sexo= ?, correo= ?,direccion= ?,telefono= ?,fecha_ingreso= ?,tipo_contrato= ?,fecha_termin_contrato= ?,cargo= ?,dependencia= ?,salario= ?,rol= ? WHERE identificacion = ?",
                    [nombresInput, apellidosInput, fechaNacimientoInput, sexoInput, correoInput, direccionInput, telefonoInput, fechaIngresoInput, tipoContratoInput, fechaTerminacionInput, cargoInput, dependenciaInput, salarioInput, rolInput, id])
         db.commit()
+        db.close()
+        flash('Empleado Modificado Exitosamente', 'editarEmpleado')
         return redirect(url_for('main.home'))
 
     form_empleado = FormEmpleado()
     return render_template('editar.html', rows=rows, form=form_empleado)
 
 
-@main.route('/', methods=['POST'])
-def eliminar():
-    form_empleado = FormEmpleado()
-    return render_template('home.html', form=form_empleado)
+@main.route('/eliminar/<id>', methods=['GET','POST'])
+def eliminar(id):
+    db = get_db()
+    db.execute('DELETE FROM tbl_empleados WHERE identificacion = ?', [id])
+    db.commit()
+    db.close()
+    flash('Empleado Eliminado Exitosamente', 'editarEmpleado')
+    return redirect(url_for('main.home'))
 
 
 @main.route('/desempenio/<id>', methods=['GET', 'POST'])
@@ -142,16 +150,18 @@ def eliminar():
 def desempenio(id):
     db = get_db()
     rows = db.execute(
-        'select * from tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+        'SELECT * FROM tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+    db.commit()
     print(rows)
     if request.method == 'POST':
         comentarioInput = escape(request.form['comentario'])
         puntajeInput = escape(request.form['puntaje'])
         idEvaluadorInput = escape(request.form['id_evaluador'])
-        db.execute("insert into tbl_desempenio (id_empleado,comentario,puntaje,id_evaluador) values(?, ?, ?, ?)",
+        db.execute("INSERT INTO tbl_desempenio (id_empleado,comentario,puntaje,id_evaluador) VALUES(?, ?, ?, ?)",
                    ([id, comentarioInput, puntajeInput, idEvaluadorInput]))
         db.commit()
         db.close()
+        flash('Desemeo Evaluado Exitosamente', 'evaluarEmpleado')
         return redirect(url_for('main.home'))
     form_desempenio = DesempenioEmpleado()
     return render_template('desempenio.html', rows=rows, form=form_desempenio)
@@ -163,7 +173,9 @@ def ver_desempenio():
     db = get_db()
     id = session['id_empleado']
     rows = db.execute(
-        'select * from tbl_desempenio where id_empleado = ?', [id]).fetchall()
+        'SELECT * FROM tbl_desempenio WHERE id_empleado = ?', [id]).fetchall()
+    db.commit()
+    db.close()
     print(rows)
     # for row in rows:
     #     id_evaluador = row[4]
@@ -179,7 +191,9 @@ def perfil():
     db = get_db()
     id = session['id_empleado']
     rows = db.execute(
-        'select * from tbl_empleados where identificacion = ?', [id]).fetchone()
+        'SELECT * FROM tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+    db.commit()
+    db.close()
     print(rows)
     form_empleado = FormEmpleado()
     return render_template('perfil.html', form=form_empleado, rows=rows)
@@ -190,11 +204,12 @@ def perfil():
 def ver_perfil(id):
     db = get_db()
     rows = db.execute(
-        'select * from tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+        'SELECT * FROM tbl_empleados WHERE identificacion = ?', [id]).fetchone()
+    db.commit()
+    db.close()
     print(rows)
     form_empleado = FormEmpleado()
     return render_template('perfil.html', form=form_empleado, rows=rows)
-
 
 @main.route('/logout', methods=['GET'])
 def logout():

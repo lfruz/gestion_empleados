@@ -3,7 +3,6 @@
 {% block title %} Inicio - Gestion de Empleados {% endblock %}
 {% block name_page %} Gestion de Empleados {% endblock %}
 {% block content %}
-
 <a href="/miWeb/crear" type="button" class="btn btn-info">
     Nuevo Empleado
 </a><br><br>
@@ -14,7 +13,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-responsive table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Identificaion</th>
@@ -41,7 +40,7 @@
                         <a href="/miWeb/editar/{{row[0]}}" title="Editar">
                             <i class="fa fa-edit" style="font-size:24px;color:blue"></i>
                         </a>
-                        <a data-toggle="modal" data-target="#exampleModalCenter" title="Eliminar">
+                        <a href="/miWeb/eliminar/{{row[0]}}" title="Eliminar">
                             <i class="fa fa-trash" style="font-size:24px;color:red"></i>
                         </a>
                         <a href="/miWeb/desempenio/{{row[0]}}" title="Calificar Desempeño">
@@ -64,27 +63,4 @@
         </table>
     </div>
     <!-- /.box-body -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-center" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Eliminar Empleado</h5>
-                </div>
-                <div class="modal-body">
-                    Desea Eliminar al Empleado.?
-                </div>
-                <div class="modal-footer">
-                    <form action="" method="post" novalidate>
-                        {{ form.hidden_tag() }}
-
-                        {{ form.eliminar(class="btn btn-success") }}
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     {% endblock %}
