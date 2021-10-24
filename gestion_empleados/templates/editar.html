@@ -4,7 +4,7 @@
 {% block name_page %} Editar Empleado {% endblock %}
 {% block content %}
 {%if rows[0]!=null %}
-<form name="formEditarEmpleado" method="post">
+<form action="{{url_for('main.editar',id=rows[0])}}" name="formEditarEmpleado" method="post">
     {{ form.hidden_tag() }}
     <div class="col-md-6">
         <div class="form-group">
@@ -108,7 +108,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ form.telefono.label }}
-            {{ form.telefono(value=rows[7], type="number", class="form-control") }}
+            {{ form.telefono(value=rows[7], type="number", class="form-control",minlength="7") }}
 
         </div>
     </div>

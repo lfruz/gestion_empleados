@@ -3,7 +3,7 @@
 {% block title %} Cambiar Contraseña - Gestion de Empleados {% endblock %}
 {% block name_page %} Cambiar Contraseña {% endblock %}
 {% block content %}
-<form name="formCambiarPassEmpleado" method="post" autocomplete="off">
+<form action="{{url_for('main.cambiar_pass')}}" name="formCambiarPassEmpleado" method="post" autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.oldPass.label }}
@@ -13,12 +13,12 @@
 
     <div class="form-group">
         {{ form.newPass.label }}
-        {{ form.newPass(class="form-control", placeholder="Nueva Contraseña") }}
+        {{ form.newPass(class="form-control", placeholder="Nueva Contraseña", minlength="8") }}
 
     </div>
     <div class="form-group">
         {{ form.confirmarNewPass.label }}
-        {{ form.confirmarNewPass(class="form-control", placeholder="Confirmar Nueva Contraseña") }}
+        {{ form.confirmarNewPass(class="form-control", placeholder="Confirmar Nueva Contraseña", minlength="8") }}
 
     </div>
     <center>

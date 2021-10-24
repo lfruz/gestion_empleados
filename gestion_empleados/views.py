@@ -275,6 +275,11 @@ def ver_desempenio():
     rows = db.execute(
         "SELECT * FROM tbl_desempenio WHERE id_empleado = ?", [id]
     ).fetchall()
+    if rows is None:
+        flash(
+            "No tienes retroalimentacion de desempeño disponibles.",
+            "desempenioEmpleado",
+        )
     db.commit()
     db.close()
     print(rows)

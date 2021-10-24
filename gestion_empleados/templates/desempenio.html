@@ -4,7 +4,7 @@
 {% block name_page %} Calificar Desempeño Empleado {% endblock %}
 {% block content %}
 {%if rows[0]!=null %}
-<form name="formDesempenioEmpleado" method="post">
+<form action="{{url_for('main.desempenio',id=rows[0])}}" name="formDesempenioEmpleado" method="post" autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.id_empleado.label }}
@@ -20,7 +20,7 @@
 
     <div class="form-group">
         {{ form.puntaje.label }}
-        {{ form.puntaje(type="number", class="form-control",min="0", max="10", placeholder="Puntaje") }}
+        {{ form.puntaje(type="number", class="form-control",min="0", max="10",maxlength="3", placeholder="Puntaje") }}
 
     </div>
     {{ form.id_evaluador(value=session['id_empleado'],type="hidden") }}

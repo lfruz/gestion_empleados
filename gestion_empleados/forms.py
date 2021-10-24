@@ -50,11 +50,9 @@ class FormEmpleado(FlaskForm):
 
 
 class DesempenioEmpleado(FlaskForm):
-    id_empleado = IntegerField(
-        "Identificacion:", validators=[DataRequired(), Length(max=10)]
-    )
+    id_empleado = IntegerField("Identificacion:", validators=[DataRequired()])
     comentario = TextAreaField("Comentario: ", validators=[DataRequired()])
-    puntaje = IntegerField("Puntaje:", validators=[DataRequired(), Length(max=2)])
+    puntaje = IntegerField("Puntaje:", validators=[DataRequired()])
     id_evaluador = IntegerField("Evaluador: ", validators=[DataRequired()])
     calificar_desempenio = SubmitField("Calificar")
 
@@ -70,6 +68,6 @@ class CambiarPassEmpleado(FlaskForm):
 
 
 class LoginEmpleado(FlaskForm):
-    user = StringField("Identificacion: ", validators=[DataRequired(), Length(max=10)])
+    user = StringField("Identificacion: ", validators=[DataRequired()])
     password = PasswordField("Contraseña: ", validators=[DataRequired()])
     entrar = SubmitField("Entrar")

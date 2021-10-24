@@ -3,8 +3,7 @@
 {% block title %} Nuevo - Gestion de Empleados {% endblock %}
 {% block name_page %} Nuevo Empleado {% endblock %}
 {% block content %}
-<form action="{{url_for('main.crear')}}" name="formCrearEmpleado" onsubmit="return validar();" method="post"
-    autocomplete="off">
+<form action="{{url_for('main.crear')}}" name="formCrearEmpleado" method="post" autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="col-md-6">
         <div class="form-group">
@@ -108,14 +107,14 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ form.telefono.label }}
-            {{ form.telefono(type="number", class="form-control", placeholder="Telefono") }}
+            {{ form.telefono(type="number", class="form-control", placeholder="Telefono", minlength="7") }}
 
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             {{ form.passw.label }}
-            {{ form.passw(type="text", class="form-control", placeholder="Contraseña") }}
+            {{ form.passw(type="text", class="form-control", placeholder="Contraseña", minlength="8") }}
 
         </div>
     </div>
