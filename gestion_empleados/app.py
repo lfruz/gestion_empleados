@@ -1,5 +1,9 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
+
+
+def page_not_found(e):
+    return render_template("error.html"), 404
 
 
 def create_app():
@@ -10,6 +14,7 @@ def create_app():
     from views import main
     from api import api
 
+    app.register_error_handler(404, page_not_found)
     app.register_blueprint(main)
     app.register_blueprint(api, url_prefix="/miApi")
 
