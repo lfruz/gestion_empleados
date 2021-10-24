@@ -67,7 +67,7 @@
     <header class="main-header">
 
       <!-- Logo -->
-      <a href="index2.html" class="logo">
+      <a class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>G.E.</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -110,7 +110,8 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Cambiar Contraseña</a>
+                    <a href="{{url_for('main.cambiar_pass')}}" class="btn btn-default btn-flat">
+                      Cambiar Contraseña</a>
                   </div>
                   <div class="pull-right">
                     <a href="{{url_for('main.logout')}}" class="btn btn-default btn-flat">Cerrar Sesion</a>
@@ -159,34 +160,33 @@
       <section class="content container-fluid">
         <div class="row">
           <div class="col-md-12">
-            {% for mensaje in get_flashed_messages(category_filter=['crearEmpleado']) %}
-            <div class="alert alert-success alert-dismissible">
+            {% for mensaje in get_flashed_messages(category_filter=['successEmpleado']) %}
+            <div class="alert alert-success alert-dismissible msj">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <h4><i class="icon fa fa-check"></i> Alert!</h4>
               {{ mensaje }}
             </div>
             {% endfor %}
-            {% for mensaje in get_flashed_messages(category_filter=['editarEmpleado']) %}
-            <div class="alert alert-success alert-dismissible">
+            {% for mensaje in get_flashed_messages(category_filter=['verificarEmpleado']) %}
+            <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h4><i class="icon fa fa-check"></i> Alert!</h4>
+              {{ mensaje }}
+            </div>
+            <div class="col-md-12">
+              <center>
+                <a type="button" href="{{url_for('main.home')}}" class="btn btn-primary">Regresar</a>
+              </center>
+            </div>
+            {% endfor %}
+            {% for mensaje in get_flashed_messages(category_filter=['errorEmpleado']) %}
+            <div class="alert alert-danger alert-dismissible msj">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
               <h4><i class="icon fa fa-check"></i> Alert!</h4>
               {{ mensaje }}
             </div>
             {% endfor %}
-            {% for mensaje in get_flashed_messages(category_filter=['deleteEmpleado']) %}
-            <div class="alert alert-success alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <h4><i class="icon fa fa-check"></i> Alert!</h4>
-              {{ mensaje }}
-            </div>
-            {% endfor %}
-            {% for mensaje in get_flashed_messages(category_filter=['evaluarEmpleado']) %}
-            <div class="alert alert-success alert-dismissible">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              <h4><i class="icon fa fa-check"></i> Alert!</h4>
-              {{ mensaje }}
-            </div>
-            {% endfor %}
+            {% if rows != None or mensaje == None%}
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">{% block name_page %} {% endblock %}</h3>
@@ -204,6 +204,7 @@
               <!-- ./box-body -->
             </div>
             <!-- /.box -->
+            {% endif %}
           </div>
           <!-- /.col -->
         </div>
@@ -294,7 +295,7 @@
 
   <!-- page script -->
   <script>
-    $(".alert").delay(2000).slideUp(200, function () {
+    $(".msj").delay(3000).slideUp(200, function () {
       $(this).alert('close');
     })
     $(function () {

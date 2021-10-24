@@ -3,7 +3,8 @@
 {% block title %} Nuevo - Gestion de Empleados {% endblock %}
 {% block name_page %} Nuevo Empleado {% endblock %}
 {% block content %}
-<form name="formCrearEmpleado" onsubmit="return validar();" method="post">
+<form action="{{url_for('main.crear')}}" name="formCrearEmpleado" onsubmit="return validar();" method="post"
+    autocomplete="off">
     {{ form.hidden_tag() }}
     <div class="col-md-6">
         <div class="form-group">
@@ -86,7 +87,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ form.salario.label }}
-            {{ form.salario(type="text", class="form-control", placeholder="Salario") }}
+            {{ form.salario(type="number", class="form-control", placeholder="Salario") }}
 
         </div>
     </div>

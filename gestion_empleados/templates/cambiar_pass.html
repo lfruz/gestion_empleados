@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+
+{% block title %} Cambiar Contraseña - Gestion de Empleados {% endblock %}
+{% block name_page %} Cambiar Contraseña {% endblock %}
+{% block content %}
+<form name="formCambiarPassEmpleado" method="post" autocomplete="off">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.oldPass.label }}
+        {{ form.oldPass(class="form-control", placeholder="Anterior Contraseña") }}
+        {{ form.id_emp(value=session['id_empleado'],type="hidden") }}
+    </div>
+
+    <div class="form-group">
+        {{ form.newPass.label }}
+        {{ form.newPass(class="form-control", placeholder="Nueva Contraseña") }}
+
+    </div>
+    <div class="form-group">
+        {{ form.confirmarNewPass.label }}
+        {{ form.confirmarNewPass(class="form-control", placeholder="Confirmar Nueva Contraseña") }}
+
+    </div>
+    <center>
+        {{ form.cambiarPass(class="btn btn-success") }}
+    </center>
+</form>
+{% endblock %}

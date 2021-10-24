@@ -20,7 +20,7 @@
 
     <div class="form-group">
         {{ form.puntaje.label }}
-        {{ form.puntaje(type="number", class="form-control", placeholder="Puntaje") }}
+        {{ form.puntaje(type="number", class="form-control",min="0", max="10", placeholder="Puntaje") }}
 
     </div>
     {{ form.id_evaluador(value=session['id_empleado'],type="hidden") }}

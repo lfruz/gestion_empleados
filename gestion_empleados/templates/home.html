@@ -3,7 +3,7 @@
 {% block title %} Inicio - Gestion de Empleados {% endblock %}
 {% block name_page %} Gestion de Empleados {% endblock %}
 {% block content %}
-<a href="/miWeb/crear" type="button" class="btn btn-info">
+<a href="{{url_for('main.crear')}}" type="button" class="btn btn-info">
     Nuevo Empleado
 </a><br><br>
 
@@ -34,24 +34,25 @@
                     <td>{{row[14]}}</td>
                     <td>
                         {% if session['rol']=='Super Administrador' %}
-                        <a href="/miWeb/ver_perfil/{{row[0]}}" title="Ver">
+
+                        <a href="{{url_for('main.ver_perfil',id=row[0])}}" title="Ver">
                             <i class="fa fa-eye" style="font-size:24px;color:black"></i>
                         </a>
-                        <a href="/miWeb/editar/{{row[0]}}" title="Editar">
+                        <a href="{{url_for('main.editar',id=row[0])}}" title="Editar">
                             <i class="fa fa-edit" style="font-size:24px;color:blue"></i>
                         </a>
-                        <a href="/miWeb/eliminar/{{row[0]}}" title="Eliminar">
+                        <a href="{{url_for('main.eliminar',id=row[0])}}" title="Eliminar">
                             <i class="fa fa-trash" style="font-size:24px;color:red"></i>
                         </a>
-                        <a href="/miWeb/desempenio/{{row[0]}}" title="Calificar Desempeño">
+                        <a href="{{url_for('main.desempenio',id=row[0])}}" title="Calificar Desempeño">
                             <i class="fa fa-line-chart" style="font-size:24px;color:green"></i>
                         </a>
                         {% endif %}
                         {% if session['rol']=='Administrador' %}
-                        <a href="/miWeb/ver_perfil?id={{row[0]}}" title="Ver">
+                        <a href="{{url_for('main.ver_perfil',id=row[0])}}" title="Ver">
                             <i class="fa fa-eye" style="font-size:24px;color:black"></i>
                         </a>
-                        <a href="/miWeb/editar/{{row[0]}}" title="Editar">
+                        <a href="{{url_for('main.editar',id=row[0])}}" title="Editar">
                             <i class="fa fa-edit" style="font-size:24px;color:blue"></i>
                         </a>
                         {% endif %}
