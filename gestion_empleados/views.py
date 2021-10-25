@@ -36,6 +36,8 @@ def login_required(view):
 @main.route("/", methods=["GET", "POST"])
 def login():
     form_login = LoginEmpleado()
+    if request.method == "GET":
+        return render_template("login.html", form=form_login)
     if request.method == "POST":
         usuario = escape(request.form["user"])
         clave = escape(request.form["password"])

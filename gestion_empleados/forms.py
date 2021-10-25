@@ -58,7 +58,7 @@ class DesempenioEmpleado(FlaskForm):
 
 
 class CambiarPassEmpleado(FlaskForm):
-    oldPass = StringField("Anterior Contraseña:", validators=[DataRequired()])
+    oldPass = StringField("Actual Contraseña:", validators=[DataRequired()])
     newPass = StringField("Nueva Contraseña: ", validators=[DataRequired()])
     confirmarNewPass = StringField(
         "Confirmar Nueva Contraseña:", validators=[DataRequired()]
