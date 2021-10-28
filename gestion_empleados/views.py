@@ -283,13 +283,16 @@ def ver_desempenio():
             "desempenioEmpleado",
         )
     db.commit()
-    db.close()
+    # db.close()
     print(rows)
-    # for row in rows:
-    #     id_evaluador = row[4]
-    #     getEvaluador = db.execute(
-    #         'select nombres,apellidos from tbl_empleados WHERE identificacion = ?', [id_evaluador]).fetchone()
-    #     datos = getEvaluador[0]+" "+getEvaluador[1]
+    for row in rows:
+        id_evaluador = row[4]
+        getEvaluador = db.execute(
+            "select nombres,apellidos from tbl_empleados WHERE identificacion = ?",
+            [id_evaluador],
+        ).fetchone()
+        datos = getEvaluador[0] + " " + getEvaluador[1]
+        print(datos)
     return render_template("ver_desempenio.html", rows=rows)
 
 

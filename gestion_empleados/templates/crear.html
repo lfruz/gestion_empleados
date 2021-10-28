@@ -107,7 +107,9 @@
     <div class="col-md-6">
         <div class="form-group">
             {{ form.telefono.label }}
-            {{ form.telefono(type="number", class="form-control", placeholder="Telefono", minlength="7") }}
+            {{ form.telefono(type="number", class="form-control", placeholder="Telefono", minlength="10" ,
+            maxlength="10")
+            }}
 
         </div>
     </div>
